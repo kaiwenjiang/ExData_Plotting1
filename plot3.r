@@ -1,6 +1,10 @@
-setwd("C:/Users/Kaiwen Jiang/Documents/Academics/Self-Study/Coursera EDA")
+datelower = as.Date("2007-02-01")
+dateupper = as.Date("2007-02-02")
+format = "%d/%m/%Y"
 
-hpc = read.table("household_power_consumption_save.txt", sep = "\t", header = T, stringsAsFactors = F, na.strings = "?")
+hpc = read.table("household_power_consumption.txt", sep = ";", header = T, stringsAsFactors = F, na.strings = "?")
+hpc = hpc[datelower <= as.Date(hpc$Date, format = format) & as.Date(hpc$Date, format = format) <= dateupper,]
+
 plot(hpc$Sub_metering_1, type = 'l', xlab = '', ylab = 'Energy sub metering', xaxt = 'n')
 axis(1,labels = c("Thu","Fri","Sat"), at = c(0,min(which(hpc$Date == "2/2/2007")),nrow(hpc)))
 lines(hpc$Sub_metering_2, col = "red")
