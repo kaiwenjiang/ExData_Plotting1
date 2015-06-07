@@ -5,8 +5,9 @@ format = "%d/%m/%Y"
 hpc = read.table("household_power_consumption.txt", sep = ";", header = T, stringsAsFactors = F, na.strings = "?")
 hpc = hpc[datelower <= as.Date(hpc$Date, format = format) & as.Date(hpc$Date, format = format) <= dateupper,]
 
+png(filename="plot4.png", width=480, height=480)
+
 plot(hpc$Global_active_power, type = 'l', xlab = '', ylab = "Global Active Power (kilowatts)", xaxt = 'n')
 axis(1,labels = c("Thu","Fri","Sat"), at = c(0,min(which(hpc$Date == "2/2/2007")),nrow(hpc)))
 
-dev.copy(png, file = "plot2.png")
 dev.off()
